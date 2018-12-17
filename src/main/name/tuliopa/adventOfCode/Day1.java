@@ -2,8 +2,10 @@ package name.tuliopa.adventOfCode;
 
 import static name.tuliopa.utils.Utils.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Day1 {
@@ -14,7 +16,6 @@ public class Day1 {
 		print("Starting at: " + new Date());
 		List<Integer> changes = new Day1().changesOfFrequencies();
 		ArrayList<Integer> state = new ArrayList<>();
-		int index = 0;
 		int currentValue = 0;
 		boolean notFound = true;
 		
@@ -24,14 +25,11 @@ public class Day1 {
 				currentValue += value;
 				if(!state.contains(currentValue)) {
 					state.add(currentValue);
-					//print("index: " + index + " \t\tvalue: " + value + " \t\tCurrent Value: " + currentValue);
 				} else {
-					//print("index: " + index + " \t\tCurrent Value: " + currentValue);
 					notFound = false;
 					break;
 				}
 				
-				index++;
 			}
 		}
 		
@@ -40,4 +38,20 @@ public class Day1 {
 		print("Finish at: " + new Date());
 	}
 	
+	public List<Integer> changesOfFrequencies() {
+		ArrayList<Integer> a = new ArrayList<>();
+		
+		try {
+			
+			Iterator<String> iterator = convertFileToStream("src/main/resources/day01.txt").iterator();
+			while(iterator.hasNext()){
+				a.add(Integer.parseInt(iterator.next()));
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
 }
